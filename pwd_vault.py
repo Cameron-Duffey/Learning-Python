@@ -49,20 +49,24 @@ password TEXT NOT NULL,
 recovery_key TEXT NOT NULL);
 """)
 
-cursor.execute("""
+cursor.execute(
+    """
 CREATE TABLE IF NOT EXISTS vault(
 id INTEGER PRIMARY KEY,
 website TEXT NOT NULL,
 username TEXT NOT NULL,
 password TEXT NOT NULL);
-""")
+"""
+)
 
-cursor.execute("""
+cursor.execute(
+    """
 CREATE TABLE IF NOT EXISTS masterkey(
 id INTEGER PRIMARY KEY,
 master_key_password TEXT NOT NULL,
 master_key_recovery_key TEXT NOT NULL);
-""")
+"""
+)
 
 #Create popup
 def pop_up(text):
@@ -194,6 +198,8 @@ def reset_screen():
             "SELECT * FROM masterpassword WHERE id = 1 AND recovery_key = ?", 
             [(recovery_key_check)],
             )
+        
+        return cursor.fetchall()
 
     def check_recovery_key():
         recover_key = get_recovery_key()
